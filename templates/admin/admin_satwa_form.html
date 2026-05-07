@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{{ 'Edit Satwa' if satwa else 'Tambah Satwa' }}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar-glass text-white p-3" style="width: 220px; min-height: 100vh;">
+      <h4 class="mb-4">ADMIN PANEL</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2"><a href="{{ url_for('admin.dashboard') }}" class="nav-link text-white">Dashboard</a>
+        </li>
+        <li class="nav-item mb-2"><a href="{{ url_for('admin.list_satwa') }}" class="nav-link text-white">Data Satwa</a>
+        </li>
+        <li class="nav-item mb-2"><a href="{{ url_for('admin.list_lokasi') }}" class="nav-link text-white">Data
+            Lokasi</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 p-4 main-content">
+      <div class="card shadow">
+        <div class="card-body">
+          <h3 class="card-title mb-4">{{ 'Edit Satwa' if satwa else 'Tambah Satwa' }}</h3>
+
+          <!-- Gambar lama -->
+          <div class="mb-3">
+            <label class="form-label">Gambar Satwa Saat Ini</label>
+            {% if satwa and satwa.gambar_relasi %}
+            <div class="row">
+              {% for g in satwa.gambar_relasi %}
+              <div class="col-4 text-center mb-3">
+
+                <img src="{{ url_for('static', filename='img/satwa/' ~ g.filename) }}"
+                  class="img-fluid rounded shadow-sm mb-2" style="max-height:150px;">
+
+                <!-- ✅ UBAH JADI TANDAI HAPUS -->
+                <button type="button" class="btn btn-sm btn-danger" onclick="tandaiHapus(this, '{{ g.id }}')">
+                  Hapus
+                </button>
+
+              </div>
+              {% endfor %}
+            </div>
+            {% else %}
+            <span class="text-muted">Belum ada gambar</span>
+            {% endif %}
+          </div>
+
+          <!-- Alert -->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show">
+            {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+
+          <!-- FORM -->
+          <form method="POST" enctype="multipart/form-data">
+
+            <!-- ✅ HIDDEN INPUT UNTUK HAPUS -->
+            <input type="hidden" name="hapus_gambar_ids" id="hapus_gambar_ids">
+
+            <!-- 🔥 UPLOAD MODERN -->
+            <div class="mb-3">
+              <label class="form-label">Upload Gambar Baru</label>
+
+              <input type="file" id="gambarInput" class="form-control" multiple>
+
+              <!-- hidden real input -->
+              <input type="file" name="gambar" id="gambarFinal" multiple hidden>
+
+              <!-- preview -->
+              <div id="previewList" class="mt-3 d-flex flex-wrap gap-2"></div>
+            </div>
+
+            <!-- Field lain -->
+            <div class="mb-3">
+              <label class="form-label">Nama Satwa</label>
+              <input type="text" class="form-control" name="nama" value="{{ satwa.nama_satwa if satwa else '' }}"
+                required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Nama Latin</label>
+              <input type="text" class="form-control" name="nama_latin" value="{{ satwa.nama_latin if satwa else '' }}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Jenis Satwa</label>
+              <select class="form-select" name="jenis" required>
+                <option value="Mamalia" {% if satwa and satwa.jenis_satwa=='Mamalia' %}selected{% endif %}>Mamalia
+                </option>
+                <option value="Burung" {% if satwa and satwa.jenis_satwa=='Burung' %}selected{% endif %}>Burung</option>
+                <option value="Reptil" {% if satwa and satwa.jenis_satwa=='Reptil' %}selected{% endif %}>Reptil</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Status Satwa</label>
+              <select class="form-select" name="status_satwa" required>
+                <option value="Dilindungi" {% if satwa and satwa.status_satwa=="Dilindungi" %}selected{% endif %}>
+                  Dilindungi</option>
+                <option value="Tidak Dilindungi" {% if satwa and satwa.status_satwa=="Tidak Dilindungi" %}selected{%
+                  endif %}>Tidak Dilindungi</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Deskripsi</label>
+              <textarea id="deskripsi" class="form-control" name="deskripsi" rows="8"
+                required>{{ satwa.deskripsi if satwa else '' }}</textarea>
+            </div>
+
+
+            <!-- Lokasi -->
+            <div class="mb-3">
+              <label class="form-label">Lokasi</label>
+              {% set lokasi_terpilih = satwa.lokasi_relasi | map(attribute='lokasi_id') | list if satwa else [] %}
+              <div class="border rounded p-2">
+                {% for lokasi in lokasi_list %}
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="lokasi_id[]" value="{{ lokasi.id }}" {% if
+                    lokasi.id in lokasi_terpilih %}checked{% endif %}>
+                  <label class="form-check-label">{{ lokasi.nama_lokasi }}</label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <!-- Tombol -->
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="{{ url_for('admin.list_satwa') }}" class="btn btn-secondary">Batal</a>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof ClassicEditor !== "undefined") {
+        ClassicEditor
+          .create(document.querySelector('#deskripsi'))
+          .catch(error => console.error(error));
+      } else {
+        console.error("CKEditor gagal load!");
+      }
+    });
+  </script>
+
+
+  <!-- 🔥 SCRIPT -->
+  <script>
+    let selectedFiles = [];
+    let gambarHapus = [];
+
+    const input = document.getElementById("gambarInput");
+    const preview = document.getElementById("previewList");
+    const finalInput = document.getElementById("gambarFinal");
+
+    input.addEventListener("change", function () {
+      for (let file of this.files) {
+        selectedFiles.push(file);
+      }
+      renderPreview();
+      updateFinalInput();
+    });
+
+    function renderPreview() {
+      preview.innerHTML = "";
+
+      selectedFiles.forEach((file, index) => {
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+          let div = document.createElement("div");
+          div.style.position = "relative";
+
+          div.innerHTML = `
+        <img src="${e.target.result}" style="width:100px;height:100px;object-fit:cover;border-radius:10px;">
+        <button onclick="removeFile(${index})"
+                style="position:absolute;top:0;right:0;background:red;color:white;border:none;border-radius:50%;">
+          ×
+        </button>
+      `;
+
+          preview.appendChild(div);
+        };
+
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function removeFile(index) {
+      selectedFiles.splice(index, 1);
+      renderPreview();
+      updateFinalInput();
+    }
+
+    function updateFinalInput() {
+      let dataTransfer = new DataTransfer();
+      selectedFiles.forEach(file => dataTransfer.items.add(file));
+      finalInput.files = dataTransfer.files;
+    }
+
+    // ✅ TANDAI HAPUS (BUKAN LANGSUNG DELETE)
+    function tandaiHapus(btn, id) {
+      gambarHapus.push(id);
+
+      // hilangkan dari tampilan
+      btn.closest('.col-4').style.display = 'none';
+
+      // simpan ke hidden input
+      document.getElementById('hapus_gambar_ids').value = gambarHapus.join(',');
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Informasi Satwa Dilindungi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body class="page-index">
+
+
+  <!-- HERO -->
+  <header class="hero-section">
+
+    <!-- LOGO KIRI ATAS -->
+    <img src="{{ url_for('static', filename='img/logo/logo.png') }}" alt="Logo Satwa Dilindungi" class="logo-top">
+
+<!-- NAVBAR -->
+<div class="top-links text-center py-2"
+     style="position:fixed; top:0; width:100%; z-index:1000; box-shadow:none;">
+  <a href="/satwa" class="mx-3 text-decoration-none text-black fw-bold">List Satwa</a>
+  <a href="/lokasi" class="mx-3 text-decoration-none text-black fw-bold">Lokasi</a>
+  <a href="/about" class="mx-3 text-decoration-none text-black fw-bold">About</a>
+</div>
+
+    <!-- Konten hero -->
+    <div class="container text-center text-white hero-content">
+      <h1 class="display-4 fw-bold">SATWA DILINDUNGI</h1>
+      <p class="lead fs-1">di Jawa Timur</p>
+    </div>
+  </header>
+
+
+  <!-- PETA MINI -->
+  <section class="container my-5 text-center">
+    <!-- gambar peta mini -->
+    <a href="/peta">
+      <img src="{{ url_for('static', filename='img/peta-mini.png') }}" alt="Peta Mini"
+        style="width:80%; max-width:800px; height:auto; object-fit:cover; display:block; margin:-250px auto 0; border:none; background:none;">
+    </a>
+    <!-- tombol lihat peta penuh -->
+    <div class="peta-deskripsi tombol-peta">
+      <a href="/peta" class="btn btn-success">Lihat Peta Penuh</a>
+    </div>
+
+    <!-- judul + deskripsi di bawah gambar -->
+    <div class="peta-deskripsi text-center">
+      <h3 class="judul-peta">Peta Persebaran Satwa Dilindungi</h3>
+      <p>
+        Peta interaktif yang menampilkan persebaran satwa dilindungi.<br>
+        Klik peta atau tombol di atas untuk melihat versi penuh.
+      </p>
+    </div>
+  </section>
+
+
+
+  <section class="container mt-5 card-lokasi">
+    <h2 class="text-center mb-4">Kategori Lokasi Konservasi</h2>
+    <div class="row">
+      <!-- Card 1 -->
+      <div class="col-md-4 mb-4">
+        <div class="card text-white" style="height:220px; overflow:hidden;">
+          <img src="{{ url_for('static', filename='img/lokasi/cagar_alam.png') }}" class="card-img" alt="Cagar Alam"
+            style="height:100%; object-fit:cover;">
+          <div class="card-img-overlay d-flex flex-column justify-content-end text-center"
+            style="background:rgba(0,0,0,0.4); padding:8px;">
+            <h6 class="card-title mb-1">CAGAR ALAM</h6>
+            <p class="card-text" style="font-size:11px; margin-bottom:4px;  color: #eee4e4;">
+              Kawasan konservasi dengan perlindungan ketat.
+            </p>
+            <a href="/lokasi/kategori/CAGAR ALAM" class="btn btn-success btn-sm">Detail</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-4 mb-4">
+        <div class="card text-white" style="height:220px; overflow:hidden;">
+          <img src="{{ url_for('static', filename='img/lokasi/suaka_margasatwa.png') }}" class="card-img"
+            alt="Suaka Margasatwa" style="height:100%; object-fit:cover;">
+          <div class="card-img-overlay d-flex flex-column justify-content-end text-center"
+            style="background:rgba(0,0,0,0.4); padding:8px;">
+            <h6 class="card-title mb-1">SUAKA MARGASATWA</h6>
+            <p class="card-text" style="font-size:11px; margin-bottom:4px; color: #eee4e4;">
+              Kawasan konservasi untuk melindungi satwa liar.
+            </p>
+            <a href="/lokasi/kategori/SUAKA MARGASATWA" class="btn btn-success btn-sm">Detail</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-md-4 mb-4">
+        <div class="card text-white" style="height:220px; overflow:hidden;">
+          <img src="{{ url_for('static', filename='img/lokasi/taman_wisata_alam.png') }}" class="card-img"
+            alt="Taman Wisata Alam" style="height:100%; object-fit:cover;">
+          <div class="card-img-overlay d-flex flex-column justify-content-end text-center"
+            style="background:rgba(0,0,0,0.4); padding:8px;">
+            <h6 class="card-title mb-1">TAMAN WISATA ALAM</h6>
+            <p class="card-text" style="font-size:11px; margin-bottom:4px; color: #eee4e4;">
+              Kawasan konservasi untuk wisata alam.
+            </p>
+            <a href="/lokasi/kategori/TAMAN WISATA ALAM" class="btn btn-success btn-sm">Detail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p class="mb-1">&copy; 2026 WebSkripsi - Satwa Dilindungi</p>
+      <p class="mb-0">
+        Dibuat oleh Gilang untuk tugas akhir Universitas<br>
+        sumber data berasal dari BBKSDA Jawa Timur
+      </p>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>

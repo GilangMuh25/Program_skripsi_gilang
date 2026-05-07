@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Kelola Data Satwa</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar-glass text-white p-3 d-flex flex-column"
+      style="width: 220px; min-height: 100vh; position:fixed; top:0; left:0; height:100%;">
+      <h4 class="mb-4">ADMIN PANEL</h4>
+      <ul class="nav flex-column flex-grow-1">
+        <li class="nav-item mb-2">
+          <a href="{{ url_for('admin.dashboard') }}"
+             class="nav-link text-white {% if request.endpoint == 'admin.dashboard' %}active-menu{% endif %}">
+             Dashboard
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="{{ url_for('admin.list_satwa') }}"
+             class="nav-link text-white {% if request.endpoint == 'admin.list_satwa' %}active-menu{% endif %}">
+             Data Satwa
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="{{ url_for('admin.list_lokasi') }}"
+             class="nav-link text-white {% if request.endpoint == 'admin.list_lokasi' %}active-menu{% endif %}">
+             Data Lokasi
+          </a>
+        </li>
+      </ul>
+
+      <!-- Tombol logout di bawah -->
+      <a href="{{ url_for('logout') }}" class="btn btn-outline-light w-100 mt-auto">
+        ⏻ Logout
+      </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 p-4" style="margin-left:220px;">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Kelola Data Satwa</h2>
+        <a href="{{ url_for('admin.add_satwa') }}" class="btn btn-success">+ Tambah Data Baru</a>
+      </div>
+
+      <!-- Search bar -->
+      <div class="mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Cari satwa...">
+      </div>
+
+      <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <div id="flash-messages">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
+
+      <script>
+        setTimeout(function () {
+          const flashMessages = document.getElementById('flash-messages');
+          if (flashMessages) {
+            flashMessages.style.display = 'none';
+          }
+        }, 5000);
+      </script>
+
+      <table class="table table-striped table-bordered align-middle" id="satwaTable">
+        <thead class="table-dark">
+          <tr>
+            <th style="width: 60px;">No</th>
+            <th style="width: 200px;">Nama Satwa</th>
+            <th style="width: 180px;">Nama Latin</th>
+            <th style="width: 120px;">Kategori</th>
+            <th style="width: 150px;">Status</th>
+            <th style="width: 250px;">Lokasi</th>
+            <th style="width: 160px;">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for satwa in satwa_list %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ satwa.nama_satwa }}</td>
+            <td>{{ satwa.nama_latin }}</td>
+            <td>{{ satwa.jenis_satwa }}</td>
+            <td>{{ satwa.status_satwa }}</td>
+            <td>
+              {% for relasi in satwa.lokasi_relasi %}
+              {{ relasi.lokasi.nama_lokasi }}<br>
+              {% endfor %}
+            </td>
+            <td>
+              <div class="d-flex justify-content-center align-items-center gap-2">
+                <a href="{{ url_for('admin.edit_satwa', satwa_id=satwa.id) }}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{{ url_for('admin.delete_satwa', satwa_id=satwa.id) }}" class="btn btn-sm btn-danger"
+                  onclick="return confirm('Yakin hapus data ini?')">Hapus</a>
+              </div>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="7" class="text-center">Belum ada data satwa</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ✅ Script Search -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("searchInput");
+      const rows = document.querySelectorAll("#satwaTable tbody tr");
+
+      searchInput.addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        rows.forEach(function (row) {
+          let text = row.innerText.toLowerCase();
+          row.style.display = text.includes(filter) ? "" : "none";
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

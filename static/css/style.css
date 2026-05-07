@@ -1,0 +1,663 @@
+/* =================================================
+   GLOBAL 
+================================================= */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* =================================================
+   INDEX PAGE (bg.png)
+================================================= */
+.page-index {
+  min-height: 100vh;
+  background-image: url("../img/bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* =================================================
+   NAVBAR
+================================================= */
+.top-links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.top-links a {
+  color: white;
+  text-decoration: none;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease,
+    text-shadow 0.3s ease;
+  display: inline-block;
+}
+
+.top-links a:hover {
+  color: #ffd700;
+  transform: scale(1.15);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+}
+
+.top-links {
+  color: #ffd700;
+  backdrop-filter: blur(2px);
+  background: rgba(133, 130, 130, 0);
+}
+
+/* =================================================
+   LOGO
+================================================= */
+.logo-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-height: 150px;
+  z-index: 10;
+}
+
+/* =================================================
+   HERO SECTION
+================================================= */
+.hero-section {
+  background: url("../img/hero.png") no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.hero-content {
+  margin-top: -220px;
+}
+
+/* =================================================
+   PETA MINI (BERANDA)
+================================================= */
+.peta-mini-img {
+  width: 80%;
+  max-width: 800px;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  /* hilangkan margin negatif */
+  border: none;
+  background: none;
+}
+
+.peta-deskripsi {
+  margin-top: 0px !important;
+  margin-bottom: 25px;
+}
+
+.judul-peta {
+  font-weight: 600;
+  color: #0a0c0e;
+}
+
+/* =================================================
+   CARD index
+================================================= */
+.card {
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 0.95rem;
+}
+
+.card-img-fixed {
+  height: 350px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-lokasi {
+  margin-top: 120px !important;
+  /* jangan 200px */
+}
+
+/* =================================================
+   foooter
+================================================= */
+
+footer {
+  background: linear-gradient(
+    to top,
+    #070101 0%,
+    /* hijau tua solid di bawah */ rgba(0, 10, 9, 0.623) 60%,
+    /* agak transparan di tengah */ rgba(0, 8, 7, 0.014) 100%
+      /* transparan di atas */
+  );
+  color: white;
+  text-align: center;
+  padding: 30px 0;
+  border-top: none;
+  /* hilangkan garis */
+}
+
+footer p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
+
+/* =================================================
+   HALAMAN PETA (KHUSUS peta.html)
+================================================= */
+.page-peta {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: none;
+  /* tidak pakai bg.png */
+}
+
+.page-peta .main-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.page-peta .sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #dee2e6;
+  padding: 20px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  overflow-y: auto;
+  z-index: 9999;
+}
+
+.page-peta .sidebar h1 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #009688;
+}
+
+.page-peta .map-container {
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  background: none;
+}
+
+.page-peta .map-container > div,
+.page-peta .map-container > div > div {
+  height: 100vh !important;
+  padding-bottom: 0 !important;
+}
+
+.page-peta .map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* =================================================
+   BUTTONS
+================================================= */
+.btn-primary {
+  background-color: #009688;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #00796b;
+}
+
+.btn-secondary {
+  background-color: #80cbc4;
+  border: none;
+}
+
+/* =================================================
+   DETAIL SATWA
+================================================= */
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent);
+
+  pointer-events: none;
+  /* 🔥 BIAR GA NUTUP KLIK */
+  z-index: 1;
+}
+
+.page-detail .hero-content {
+  position: absolute;
+  top: 50%;
+  left: 60px;
+  transform: translateY(-50%);
+  color: white;
+  max-width: 500px;
+
+  z-index: 2;
+  /* 🔥 DI ATAS OVERLAY */
+}
+
+/* 🔥 HERO */
+.hero {
+  position: relative;
+  height: 90vh;
+  overflow: hidden;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* HERO KHUSUS DETAIL */
+.hero-content-detail {
+  position: absolute;
+  bottom: 250px;
+  left: 60px;
+
+  max-width: 500px;
+  color: white;
+
+  z-index: 2;
+}
+
+/* biar teks kebaca */
+.hero-content-detail h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-content-detail h5 {
+  opacity: 0.85;
+}
+
+.hero-content-detail p {
+  font-size: 0.95rem;
+}
+
+/* badge modern */
+.status-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+/* 🔥 FLOATING CARD */
+.page-detail .main-box {
+  position: relative;
+  margin-top: -100px;
+  /* bisa adjust */
+  z-index: 5;
+  /* 🔥 HARUS di atas hero */
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* 🔥 INFO GRID */
+.info-box {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* 🔥 LOKASI TAG */
+.lokasi-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #e0f2f1;
+  color: #00796b;
+  border-radius: 20px;
+  margin: 4px;
+  font-size: 0.85rem;
+}
+
+/* 🔥 GALLERY */
+.gallery img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* 🔥 DESKRIPSI */
+.satwa-deskripsi {
+  line-height: 1.7;
+  text-align: justify;
+}
+
+/* =================================================
+   LOKASI.html
+================================================= */
+
+.lokasi-card {
+  position: relative;
+  height: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.lokasi-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* 🔥 overlay gelap bawah */
+.lokasi-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  color: white;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.4),
+    transparent
+  );
+}
+
+/* teks */
+.lokasi-overlay h5 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.lokasi-overlay p {
+  font-size: 0.85rem;
+  margin: 5px 0 0;
+  opacity: 0.9;
+}
+
+/* hover efek */
+.lokasi-card:hover img {
+  transform: scale(1.08);
+}
+
+/* NAVBAR OFFSET BIAR GA KETIMPA */
+.nav-offset {
+  margin-top: 120px;
+}
+
+/* kalau data sedikit */
+.sedikit {
+  margin-top: 0px !important;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* =========================
+   SATWA.HTML
+========================= */
+
+.satwa-card {
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.satwa-card img {
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.satwa-card:hover img {
+  transform: scale(1.1);
+}
+
+.satwa-card .card-body {
+  padding: 8px;
+}
+
+.satwa-card h6 {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.satwa-card p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* 🔥 biar ga ketiban navbar */
+.nav-offset {
+  margin-top: 100px;
+}
+
+/* =================================================
+  admin page
+================================================= */
+/* SIDEBAR GLASS + BG */
+.sidebar-glass {
+  position: relative;
+
+  background: url("/static/img/bglogin.png") no-repeat center center;
+  background-size: cover;
+
+  overflow: hidden;
+}
+
+/* overlay + blur */
+.sidebar-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* biar isi di atas overlay */
+.sidebar-glass * {
+  position: relative;
+  z-index: 1;
+}
+
+/* hover menu */
+.nav-link {
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  padding-left: 10px;
+}
+
+/* =================================================
+  admin dropdown dashboard
+================================================= */
+
+/* Styling untuk tombol dropdown */
+#dropdownTambah {
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 8px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling untuk menu dropdown */
+.dropdown-menu {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+}
+
+/* Item di dalam dropdown */
+.dropdown-item {
+  padding: 10px 20px;
+  font-weight: 500;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: #e9ecef;
+  color: #198754; /* hijau Bootstrap */
+  border-radius: 6px;
+}
+
+/* =================================================
+  adminlokasi.html
+================================================= */
+
+/* supaya deskripsi wrap ke bawah */
+.desc-cell {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;       /* tampil maksimal 2 baris */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;         /* biar teks bisa turun ke bawah */
+  max-width: 300px;            /* sesuaikan lebar kolom */
+}
+
+/* =================================================
+  animasi sidebar
+================================================= */
+
+/* ACTIVE SIDEBAR */
+.active-menu {
+  background: linear-gradient(135deg, #3335355d, #97a3a263);
+  border-radius: 8px;
+  padding-left: 10px;
+  transition: 0.3s;
+}
+
+/* hover effect biar smooth */
+.sidebar-glass .nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.modal-content {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-header img {
+  max-height: 300px;
+  object-fit: cover;
+  width: 100%;
+}
+
+
+
+
+.top-bar, .top-links {
+  border: none;
+}
+
+
+
+
+
+
+
+
+/* Sidebar tetap fixed */
+.sidebar-glass {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh; /* penuh layar */
+  overflow-y: auto; /* kalau sidebar panjang, bisa scroll sendiri */
+}
+
+/* Main content geser ke kanan */
+.main-content {
+  margin-left: 220px; /* sama dengan lebar sidebar */
+  padding: 20px;
+}
+
+
+
+
+.lokasi-deskripsi-singkat {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;   
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  color: #fffdfd;
+}
+
+
+
+
+
+/* =================================================
+   ini hapus kalo gamau bg nya diem
+================================================= */
+
+body {
+  background-image: url("../img/bg.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  /* biar elegan */
+}
+
+/* CARD GLASS EFFECT (bukan halaman) */
+.lokasi-item .card {
+  background: rgba(255, 255, 255, 0.15);
+  /* transparan */
+  backdrop-filter: blur(10px);
+  /* blur cuma di card */
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}

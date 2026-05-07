@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Peta Satwa Konservasi</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="page-peta">
+
+<div class="main-container">
+  {% if not mini %}
+  <!-- Sidebar filter -->
+  <div class="sidebar">
+    <h1>Peta Persebaran Satwa</h1>
+    <form action="/peta" method="GET" class="mb-3">
+      <!-- Dropdown Nama Hewan -->
+      <div class="mb-3">
+        <label for="nama_satwa" class="form-label">Nama Hewan</label>
+        <select id="nama_satwa" name="nama_satwa" class="form-select">
+          <option value="">-- Pilih Hewan --</option>
+          {% for s in satwa_list %}
+          <option value="{{ s.nama_satwa }}" {% if nama_satwa==s.nama_satwa %}selected{% endif %}>
+            {{ s.nama_satwa }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Dropdown Lokasi -->
+      <div class="mb-3">
+        <label for="lokasi" class="form-label">Lokasi Konservasi</label>
+        <select id="lokasi" name="lokasi" class="form-select">
+          <option value="">-- Pilih Lokasi --</option>
+          {% for l in lokasi_list %}
+          <option value="{{ l.nama_lokasi }}" {% if lokasi==l.nama_lokasi %}selected{% endif %}>
+            {{ l.nama_lokasi }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Dropdown Jenis -->
+      <div class="mb-3">
+        <label for="jenis" class="form-label">Jenis Satwa</label>
+        <select id="jenis" name="jenis" class="form-select">
+          <option value="">-- Pilih Jenis Satwa --</option>
+          <option value="Burung" {% if jenis=="Burung" %}selected{% endif %}>Burung</option>
+          <option value="Mamalia" {% if jenis=="Mamalia" %}selected{% endif %}>Mamalia</option>
+          <option value="Reptil" {% if jenis=="Reptil" %}selected{% endif %}>Reptil</option>
+        </select>
+      </div>
+
+      <!-- Tombol -->
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="/peta" class="btn btn-secondary">Reset</a>
+        <a href="/" class="btn btn-dark">Kembali ke Halaman Utama</a>
+      <p class="text-muted mt-2" style="font-size:12px;">
+        *Pilih salah satu dari ketiga filter di atas
+      </p>
+      </div>
+    </form>
+  </div>
+
+  {% endif %}
+
+  <!-- Map container -->
+  <div class="map-container" id="map-container">
+    {% if mini %}
+      <!-- Thumbnail semua lokasi jadi trigger modal -->
+      <div class="d-flex flex-wrap justify-content-center">
+        {% for l in lokasi_list %}
+          <img src="{{ url_for('static', filename='img/lokasi/' ~ (l.gambar if l.gambar else 'default.png')) }}"
+               alt="{{ l.nama_lokasi }}"
+               class="img-thumbnail m-2"
+               style="width:200px; cursor:pointer;"
+               data-bs-toggle="modal" data-bs-target="#popup{{ l.id }}">
+        {% endfor %}
+      </div>
+    {% else %}
+      {{ map_html|safe }}
+    {% endif %}
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

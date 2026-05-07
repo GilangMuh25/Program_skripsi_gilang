@@ -1,0 +1,17 @@
+# Virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# Database files
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Alembic migration cache
+migrations/__pycache__/

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ satwa.nama_satwa }} - Detail Satwa</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+<body class="page-detail">
+
+    <!-- NAVBAR -->
+    <div class="top-links text-center py-2">
+        <a href="/" class="mx-3 text-decoration-none text-white fw-bold">Beranda</a>
+        <a href="/satwa" class="mx-3 text-decoration-none text-white fw-bold">List Satwa</a>
+
+        <a href="/lokasi" class="mx-3 text-decoration-none text-white fw-bold">Lokasi</a>
+        <a href="/about" class="mx-3 text-decoration-none text-white fw-bold">About</a>
+    </div>
+
+    <!-- 🔥 HERO -->
+    <div class="hero">
+        {% if satwa.gambar_relasi %}
+        <img src="{{ url_for('static', filename='img/satwa/' ~ satwa.gambar_relasi[0].filename) }}">
+        {% else %}
+        <img src="{{ url_for('static', filename='img/satwa/default.png') }}">
+        {% endif %}
+
+        <div class="hero-content-detail">
+            <h1>{{ satwa.nama_satwa }}</h1>
+            <h5><em>{{ satwa.nama_latin }}</em></h5>
+
+            <span class="status-badge
+        {% if satwa.status_satwa == 'Dilindungi' %} bg-danger
+        {% elif satwa.status_satwa in ['CR','Kritis'] %} bg-danger
+        {% elif satwa.status_satwa in ['EN','Terancam'] %} bg-warning text-dark
+        {% elif satwa.status_satwa in ['VU','Rentan'] %} bg-info text-dark
+        {% else %} bg-secondary {% endif %}">
+                {{ satwa.status_satwa }}
+            </span>
+
+            <p class="mt-3">
+                Satwa ini merupakan bagian dari keanekaragaman hayati yang perlu dijaga dan dilestarikan.
+            </p>
+
+            <a href="/peta?nama_satwa={{ satwa.nama_satwa }}" class="btn btn-success mt-2">
+                Lihat di Peta
+            </a>
+        </div>
+    </div>
+
+    <!-- 🔥 CONTENT -->
+    <section class="container">
+
+        <div class="main-box">
+
+            <!-- 🔥 INFO GRID -->
+            <div class="row mb-4 text-center">
+                <div class="col-md-4">
+                    <div class="info-box 
+                {% if satwa.status_satwa == 'Dilindungi' %} box-dilindungi
+                {% else %} box-normal {% endif %}">
+                        <h6>Jenis</h6>
+                        <p>{{ satwa.jenis_satwa }}</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="info-box 
+                {% if satwa.status_satwa == 'Dilindungi' %} box-dilindungi
+                {% else %} box-normal {% endif %}">
+                        <h6>Status</h6>
+                        <p class="
+                    {% if satwa.status_satwa == 'Dilindungi' %} text-danger fw-bold
+                    {% else %} text-success fw-semibold {% endif %}">
+                            {{ satwa.status_satwa }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="info-box 
+                {% if satwa.status_satwa == 'Dilindungi' %} box-dilindungi
+                {% else %} box-normal {% endif %}">
+                        <h6>Habitat</h6>
+                        <p>Indonesia</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🔥 LOKASI -->
+            <h5>Lokasi Persebaran</h5>
+            <div class="mb-3">
+                {% for relasi in satwa.lokasi_relasi %}
+                <span class="lokasi-tag">
+                    {{ relasi.lokasi.nama_lokasi }}
+                </span>
+                {% endfor %}
+            </div>
+            <!-- 🔥 GALLERY -->
+            <h5 class="mt-4">Galeri</h5>
+            <div class="row gallery">
+                {% for g in satwa.gambar_relasi %}
+                <div class="col-md-4 mb-3">
+                    <img src="{{ url_for('static', filename='img/satwa/' ~ g.filename) }}"
+                        class="img-fluid rounded shadow-sm gallery-img" style="cursor:pointer;">
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- 🔥 DISCLAIMER NOTE -->
+            <p class="text-muted fst-italic" style="font-size:0.85rem; margin-top:10px;">
+                *Gambar satwa dihasilkan dengan bantuan AI. Bentuk, warna, atau detail mungkin berbeda dari kondisi
+                asli.
+            </p>
+
+
+            <!-- 🔥 DESKRIPSI -->
+            <h5 class="mt-4">Deskripsi</h5>
+            <div class="satwa-deskripsi">
+                {{ satwa.deskripsi | safe }}
+            </div>
+
+            <!-- BUTTON -->
+            <div class="text-center mt-4">
+                <a href="/satwa" class="btn btn-secondary">Kembali</a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark border-0">
+                <div class="modal-body text-center p-0">
+                    <img id="modalImage" src="" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- 🔥 MODAL -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark border-0">
+                <div class="modal-body text-center p-0">
+                    <img id="modalImage" src="" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔥 SCRIPT -->
+    <script>
+        const images = document.querySelectorAll(".gallery-img");
+        const modalImage = document.getElementById("modalImage");
+
+        images.forEach(img => {
+            img.addEventListener("click", function () {
+                modalImage.src = this.src;
+
+                let modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                modal.show();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+
+</body>
+
+</html>

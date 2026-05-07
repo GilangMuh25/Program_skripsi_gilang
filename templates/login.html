@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* 🔥 Background gradient */
+        body {
+            background: url("{{ url_for('static', filename='img/bglogin.png') }}") no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+        }
+
+        /* 🔥 Card styling */
+        .login-card {
+            width: 400px;
+            border-radius: 20px;
+
+            /* 🔥 efek transparan */
+            background: rgba(255, 255, 255, 0.15);
+
+            /* 🔥 blur kaca */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            /* 🔥 border halus */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            /* 🔥 shadow biar ngangkat */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 🔥 Input lebih smooth */
+        .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
+        /* 🔥 Button lebih modern */
+        .btn-login {
+            background: #2a5298;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            background: #1e3c72;
+            transform: scale(1.03);
+        }
+
+        /* 🔥 Title */
+        .login-title,
+        .form-label {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
+        <div class="card shadow-lg login-card">
+            <div class="card-body p-4">
+
+                <h3 class="text-center mb-4 login-title">🔐 Login Admin</h3>
+
+                {% if error %}
+                <div class="alert alert-danger text-center">{{ error }}</div>
+                {% endif %}
+
+                <form method="POST" action="{{ url_for('login') }}">
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" placeholder="Masukkan username"
+                            required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="Masukkan password"
+                            required>
+                    </div>
+
+                    <button type="submit" class="btn btn-login w-100">Login</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

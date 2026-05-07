@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>About</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* HERO */
+    .about-hero {
+      position: relative;
+      height: 70vh;
+      background: url('/static/img/about.png') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .about-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* SECTION STYLE */
+    .about-box {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-box p {
+      text-align: justify;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .fitur-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div class="top-links text-center py-2">
+    <a href="/" class="mx-3 text-decoration-none text-white fw-bold">Beranda</a>
+    <a href="/satwa" class="mx-3 text-decoration-none text-white fw-bold">List Satwa</a>
+    <a href="/peta" class="mx-3 text-decoration-none text-white fw-bold">Peta</a>
+    <a href="/lokasi" class="mx-3 text-decoration-none text-white fw-bold">Lokasi</a>
+    <a href="/about" class="mx-3 text-decoration-none text-white fw-bold">About</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="about-hero-content">
+      <h1 class="display-4 fw-bold">Tentang Website</h1>
+      <p class="lead">Menjaga Satwa, Menjaga Masa Depan</p>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="container my-5">
+
+    <div class="about-box mb-5">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h3>Tentang Kami</h3>
+          <p>
+            Website ini dikembangkan sebagai media informasi digital yang menyajikan data mengenai
+            persebaran satwa dilindungi, khususnya di wilayah Jawa Timur. Tujuan utama dari website ini
+            adalah untuk meningkatkan kesadaran masyarakat terhadap pentingnya menjaga kelestarian
+            satwa liar yang terancam punah, serta memberikan akses informasi yang lebih mudah, interaktif,
+            dan edukatif.
+          </p>
+          <p>
+          Melalui fitur peta interaktif, pengguna dapat melihat secara visual lokasi persebaran satwa
+          di berbagai kawasan konservasi. Selain itu, website ini juga menyediakan informasi detail
+          mengenai masing-masing satwa, seperti nama lokal, nama ilmiah, status konservasi, serta
+          deskripsi singkat mengenai karakteristik dan habitatnya.
+
+          Data yang disajikan dalam website ini bersumber dari Balai Besar Konservasi Sumber Daya
+          Alam (BBKSDA) Jawa Timur sebagai lembaga resmi yang menangani konservasi satwa di wilayah tersebut.
+          Sementara itu, gambar yang digunakan pada beberapa bagian website merupakan hasil generasi
+          kecerdasan buatan (Artificial Intelligence) yang digunakan untuk mendukung visualisasi dan
+          mempermudah pemahaman pengguna.
+          </p>
+          <p>
+          Dengan adanya website ini, diharapkan dapat menjadi sarana edukasi yang bermanfaat,
+          meningkatkan kepedulian masyarakat terhadap konservasi satwa, serta mendukung upaya
+          pelestarian keanekaragaman hayati di Indonesia.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <img src="/static/img/hero.png" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+
+    <!-- MISI -->
+    <div class="about-box text-center mb-5">
+      <h3>Misi Kami</h3>
+      <p>Edukasi, konservasi, dan visualisasi data satwa untuk masa depan yang lebih baik.</p>
+    </div>
+
+    <!-- FITUR -->
+    <div class="row text-center g-4">
+      <div class="col-md-4">
+        <div class="about-box">
+          <div class="fitur-icon">🗺️</div>
+          <h5>Peta Interaktif</h5>
+          <p>Menampilkan persebaran satwa secara interaktif.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="about-box">
+          <div class="fitur-icon">🐾</div>
+          <h5>Data Satwa</h5>
+          <p>Informasi lengkap tentang satwa dilindungi.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="about-box">
+          <div class="fitur-icon">📍</div>
+          <h5>Lokasi</h5>
+          <p>Detail lokasi konservasi di Indonesia.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECH -->
+    <div class="about-box text-center mt-5">
+      <h4>Teknologi</h4>
+      <p>Flask • PostgreSQL • Folium • Bootstrap</p>
+    </div>
+
+  </section>
+
+</body>
+
+</html>
