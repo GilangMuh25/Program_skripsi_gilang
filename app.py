@@ -9,15 +9,22 @@ from admin import admin_bp
 from dotenv import load_dotenv
 import os
 
-# Load environment variables
+# Load environment variables (biarkan saja, tapi pastikan tidak crash)
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+
+# Ambil URL database dan perbaiki jika ada masalah prefix
+database_url = os.getenv("DATABASE_URL")
+if database_url and database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "fallback-secret-key-123") # Tambahkan default value
+
 db.init_app(app)
 migrate = Migrate(app, db)
-app.secret_key = os.getenv("SECRET_KEY")
 app.register_blueprint(admin_bp)
 
 
@@ -310,8 +317,6 @@ def map_view():
 # =======================
 # RUN
 # =======================
+# Hapus bagian db.create_all() dari sini agar tidak crash saat startup Gunicorn
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    app.run()
