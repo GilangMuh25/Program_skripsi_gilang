@@ -59,17 +59,16 @@ def add_satwa():
     lokasi_list = LokasiKonservasi.query.order_by(LokasiKonservasi.id.asc()).all()
 
     if request.method == 'POST':
-        nama      = request.form.get('nama')
-        latin     = request.form.get('nama_latin')
-        jenis     = request.form.get('jenis')
-        status    = request.form.get('status_satwa')
-        deskripsi = request.form.get('deskripsi')
+        nama       = request.form.get('nama')
+        latin      = request.form.get('nama_latin')
+        jenis      = request.form.get('jenis')
+        status     = request.form.get('status_satwa')
+        deskripsi  = request.form.get('deskripsi')
         lokasi_ids = request.form.getlist('lokasi_id[]')
 
-        # ✅ Validasi dulu sebelum simpan
+        # ✅ Validasi kolom wajib
         if not nama or not latin or not jenis or not status or not deskripsi or not lokasi_ids:
             flash("Semua kolom wajib diisi dan minimal satu lokasi harus dipilih!", "danger")
-            # kirim data sementara supaya form tetap terisi
             satwa_temp = Satwa(
                 nama_satwa=nama,
                 nama_latin=latin,
@@ -81,7 +80,7 @@ def add_satwa():
                                    lokasi_list=lokasi_list,
                                    satwa=satwa_temp)
 
-        # cek duplikat nama satwa
+        # ✅ Cek duplikat nama satwa
         existing = Satwa.query.filter_by(nama_satwa=nama).first()
         if existing:
             flash("Nama satwa sudah ada, gunakan nama lain!", "danger")
@@ -96,7 +95,7 @@ def add_satwa():
                                    lokasi_list=lokasi_list,
                                    satwa=satwa_temp)
 
-        # ✅ kalau lolos validasi → baru simpan
+        # ✅ Simpan satwa baru
         satwa = Satwa(
             nama_satwa=nama,
             nama_latin=latin,
@@ -128,6 +127,7 @@ def add_satwa():
 
     return render_template('admin/admin_satwa_form.html', lokasi_list=lokasi_list, satwa=None)
 
+
 @admin_bp.route('/satwa/edit/<int:satwa_id>', methods=['GET','POST'])
 def edit_satwa(satwa_id):
     if not session.get("admin_logged_in"):
@@ -137,11 +137,11 @@ def edit_satwa(satwa_id):
     lokasi_list = LokasiKonservasi.query.order_by(LokasiKonservasi.id.asc()).all()
 
     if request.method == 'POST':
-        nama     = request.form.get('nama')
-        latin    = request.form.get('nama_latin')
-        jenis    = request.form.get('jenis')
-        status   = request.form.get('status_satwa')
-        deskripsi= request.form.get('deskripsi')
+        nama       = request.form.get('nama')
+        latin      = request.form.get('nama_latin')
+        jenis      = request.form.get('jenis')
+        status     = request.form.get('status_satwa')
+        deskripsi  = request.form.get('deskripsi')
         lokasi_ids = request.form.getlist('lokasi_id[]')
 
         # ✅ Validasi kolom wajib
@@ -151,14 +151,22 @@ def edit_satwa(satwa_id):
                                    satwa=satwa,
                                    lokasi_list=lokasi_list)
 
-        # kalau lolos validasi → update data
+        # ✅ Cek duplikat nama satwa
+        existing = Satwa.query.filter_by(nama_satwa=nama).first()
+        if existing and existing.id != satwa.id:
+            flash("Nama satwa sudah dipakai, gunakan nama lain!", "danger")
+            return render_template('admin/admin_satwa_form.html',
+                                   satwa=satwa,
+                                   lokasi_list=lokasi_list)
+
+        # update data satwa
         satwa.nama_satwa   = nama
         satwa.nama_latin   = latin
         satwa.jenis_satwa  = jenis
         satwa.status_satwa = status
         satwa.deskripsi    = deskripsi
 
-        # update lokasi relasi
+        # ✅ update lokasi relasi (clear dulu)
         SatwaLokasi.query.filter_by(satwa_id=satwa.id).delete()
         for lid in lokasi_ids:
             relasi = SatwaLokasi(satwa_id=satwa.id, lokasi_id=int(lid))
@@ -174,8 +182,8 @@ def edit_satwa(satwa_id):
                 new_gambar = SatwaGambar(satwa_id=satwa.id, filename=filename)
                 db.session.add(new_gambar)
 
+        # hapus gambar lama jika ada request
         hapus_ids = request.form.get('hapus_gambar_ids')
-
         if hapus_ids:
             ids = hapus_ids.split(',')
             for gid in ids:
@@ -216,6 +224,7 @@ def delete_satwa_gambar(satwa_id, gambar_id):
     flash("Gambar berhasil dihapus!", "success")
     # ✅ setelah hapus, tetap kembali ke halaman edit satwa
     return redirect(url_for('admin.edit_satwa', satwa_id=satwa_id))
+
 
 
 # =======================
