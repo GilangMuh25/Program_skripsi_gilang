@@ -153,16 +153,19 @@
   <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      if (typeof ClassicEditor !== "undefined") {
-        ClassicEditor
-          .create(document.querySelector('#deskripsi'))
-          .catch(error => console.error(error));
-      } else {
-        console.error("CKEditor gagal load!");
-      }
-    });
+    ClassicEditor
+      .create(document.querySelector('#deskripsi'))
+      .then(editor => {
+        const form = document.querySelector('form');
+        form.addEventListener('submit', () => {
+          document.querySelector('#deskripsi').value = editor.getData();
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   </script>
+
 
 
   <!-- 🔥 SCRIPT -->
