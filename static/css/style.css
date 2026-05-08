@@ -563,7 +563,7 @@ footer p {
 }
 
 /* =================================================
-  animasi sidebar
+  Animasi sidebar & layout
 ================================================= */
 
 /* ACTIVE SIDEBAR */
@@ -591,9 +591,6 @@ footer p {
   width: 100%;
 }
 
-
-
-
 .top-bar, .top-links {
   border: none;
 }
@@ -613,6 +610,35 @@ footer p {
   margin-left: 220px; /* sama dengan lebar sidebar */
   padding: 20px;
 }
+
+/* =================================================
+  CKEditor & Upload Preview
+================================================= */
+.ck-editor__editable_inline {
+  min-height: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0.75rem;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.ck.ck-editor {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#previewList img {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+#previewList button {
+  cursor: pointer;
+  font-weight: bold;
+}
+
 
 
 
@@ -656,47 +682,6 @@ body {
 }
 
 
-/* ===== CKEditor Styling ===== */
-.ck-editor__editable_inline {
-  min-height: 200px;       /* tinggi minimal editor */
-  max-height: 300px;       /* batasi tinggi maksimal */
-  overflow-y: auto;        /* aktifkan scroll kalau teks panjang */
-  padding: 0.75rem;        /* spasi dalam editor */
-  border-radius: 6px;      /* sudut membulat */
-  background-color: #fff;  /* latar belakang putih */
-}
-
-.ck.ck-editor {
-  margin-top: 0.5rem;      /* jarak atas editor */
-  margin-bottom: 1rem;     /* jarak bawah editor */
-}
-
-/* ===== Sidebar Styling ===== */
-.sidebar-glass {
-  position: fixed;         /* sidebar tetap */
-  top: 0;
-  left: 0;
-  height: 100vh;           /* penuh tinggi layar */
-  background: rgba(33, 37, 41, 0.9); /* efek kaca gelap */
-  overflow-y: auto;        /* scroll kalau konten panjang */
-}
-
-/* ===== Main Content ===== */
-.main-content {
-  margin-left: 220px;      /* offset sesuai lebar sidebar */
-}
-
-/* ===== Preview Gambar Upload ===== */
-#previewList img {
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-#previewList button {
-  cursor: pointer;
-  font-weight: bold;
-}
 
 
 
