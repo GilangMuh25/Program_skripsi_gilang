@@ -245,17 +245,26 @@ def add_lokasi():
         return redirect(url_for("login"))
 
     if request.method == 'POST':
-        nama = request.form.get('nama_lokasi')
-        kategori = request.form.get('kategori')
+        nama      = request.form.get('nama_lokasi')
+        kategori  = request.form.get('kategori')
         deskripsi = request.form.get('deskripsi')
-        latitude = request.form.get('latitude')
+        latitude  = request.form.get('latitude')
         longitude = request.form.get('longitude')
 
         # ✅ Validasi kolom wajib
         if not nama or not kategori or not deskripsi or not latitude or not longitude:
             flash("Semua kolom wajib diisi!", "danger")
-            return render_template('admin/admin_lokasi_form.html', lokasi=None)
+            # kirim data sementara supaya form tetap terisi
+            lokasi_temp = LokasiKonservasi(
+                nama_lokasi=nama,
+                kategori=kategori,
+                deskripsi=deskripsi,
+                latitude=latitude if latitude else None,
+                longitude=longitude if longitude else None
+            )
+            return render_template('admin/admin_lokasi_form.html', lokasi=lokasi_temp)
 
+        # ✅ kalau lolos validasi → simpan
         lokasi = LokasiKonservasi(
             nama_lokasi=nama,
             kategori=kategori,
@@ -278,8 +287,8 @@ def add_lokasi():
         flash("Lokasi baru berhasil ditambahkan!", "success")
         return redirect(url_for('admin.list_lokasi'))
 
+    # GET → tampilkan form kosong
     return render_template('admin/admin_lokasi_form.html', lokasi=None)
-
 
 
 @admin_bp.route('/lokasi/edit/<int:lokasi_id>', methods=['GET','POST'])
