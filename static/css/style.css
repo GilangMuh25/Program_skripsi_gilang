@@ -18,6 +18,95 @@ body {
   background-repeat: no-repeat;
 }
 
+.footer-home {
+
+  background: black;
+
+  padding: 35px 20px;
+
+  text-align: center;
+
+  color: #777;
+}
+
+
+/* =========================
+   REVEAL ANIMATION
+========================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(70px);
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   SMOOTH CARD EFFECT
+========================= */
+
+.satwa-item,
+.lokasi-item,
+.index-reveal {
+  transition: 0.4s ease;
+}
+
+/* =========================
+   IMAGE LAZY LOADING
+========================= */
+
+img[loading="lazy"] {
+  transition: opacity 0.5s ease;
+}
+
+/* =========================
+   HOVER EFFECT CARD
+========================= */
+
+.satwa-card,
+.lokasi-card,
+.card-lokasi .card {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.satwa-card:hover,
+.lokasi-card:hover,
+.card-lokasi .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+}
+
+
+
+
+
+/* =========================
+   GLASS BLUR NAVBAR
+========================= */
+
+.top-bar,
+.top-links {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* =========================
+   SMOOTH SECTION LOOK
+========================= */
+
+body {
+  scroll-behavior: smooth;
+}
+
+
 /* =================================================
    NAVBAR
 ================================================= */
@@ -366,6 +455,51 @@ footer p {
 }
 
 /* =================================================
+   DETAIL LOKASI
+================================================= */
+
+
+/* GLASS BOX DESKRIPSI */
+.glass-desc{
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    border-radius: 24px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.15);
+
+    color: #222;
+
+    transition: 0.3s ease;
+}
+
+.glass-desc:hover{
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 36px rgba(0,0,0,0.18);
+}
+
+.glass-desc h5{
+    font-weight: 700;
+    color: #111;
+}
+
+.lokasi-deskripsi{
+    line-height: 1.8;
+    font-size: 15px;
+    color: #333;
+    text-align: justify;
+}
+
+
+
+/* =================================================
    LOKASI.html
 ================================================= */
 
@@ -431,6 +565,33 @@ footer p {
   justify-content: center;
 }
 
+
+
+/* =========================
+   REVEAL LOKASI
+========================= */
+
+.reveal-lokasi {
+
+  opacity: 0;
+
+  transform: translateY(70px);
+
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+
+.reveal-lokasi.active {
+
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+
+
 /* =========================
    SATWA.HTML
 ========================= */
@@ -469,6 +630,34 @@ footer p {
 .nav-offset {
   margin-top: 100px;
 }
+
+
+
+
+/* =========================
+   REVEAL SATWA
+========================= */
+
+.reveal-satwa {
+
+  opacity: 0;
+
+  transform: translateY(70px);
+
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+
+.reveal-satwa.active {
+
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+
 
 /* =================================================
   admin page
@@ -655,6 +844,254 @@ footer p {
 
 
 
+/* ========================================
+   ABOUT PAGE
+======================================== */
+
+/* MAIN SECTION */
+
+.main-section-about {
+
+  padding: 120px 20px 100px;
+
+  background:
+    linear-gradient(135deg,
+      #000000,
+      #26292888,
+      #b6b1b1);
+}
+
+.section-title-about {
+
+  color: #00C896;
+
+  font-size: 2.9rem;
+
+  font-weight: 700;
+
+  margin-top: -50px;
+
+  margin-bottom: 30px;
+}
+
+.section-statistic-about {
+
+  color: #00C896;
+
+  font-size: 2.9rem;
+
+  font-weight: 700;
+
+  margin-top: 80px;
+
+  margin-bottom: 30px;
+}
+
+.section-text-about {
+
+  color: #d0d0d0;
+
+  line-height: 2;
+
+  margin-bottom: 22px;
+
+  font-size: 1.05rem;
+}
+
+/* IMAGE GRID */
+
+.image-grid-about {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 18px;
+}
+
+.image-grid-about img {
+
+  width: 100%;
+
+  height: 250px;
+
+  object-fit: cover;
+
+  border-radius: 24px;
+
+  transition: 0.45s;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.45);
+}
+
+.image-grid-about img:hover {
+
+  transform: scale(1.04) translateY(-4px);
+}
+
+/* GLASS CARD */
+
+.glass-card-about {
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 32px;
+
+  padding: 55px 30px;
+
+  backdrop-filter: blur(14px);
+
+  transition: 0.35s;
+
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+.glass-card-about:hover {
+
+  transform: translateY(-7px);
+}
+
+.glass-card-about h1 {
+
+  font-size: 4rem;
+
+  color: #00C896;
+
+  font-weight: 800;
+}
+
+.glass-card-about p {
+
+  color: #d0d0d0;
+
+  margin-top: 10px;
+
+  font-size: 1.1rem;
+}
+
+/* LARGE GLASS */
+
+.glass-large-about {
+
+  max-width: 950px;
+
+  margin: auto;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 35px;
+
+  padding: 65px 45px;
+
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 10px 45px rgba(0, 0, 0, 0.35);
+}
+
+.glass-large-about h2 {
+
+  color: #00C896;
+
+  font-weight: 700;
+}
+
+.glass-large-about p {
+
+  color: #d2d2d2;
+
+  line-height: 2;
+
+  font-size: 1.05rem;
+}
+
+.support-text-about {
+
+  letter-spacing: 4px;
+
+  font-size: 13px;
+
+  color: #b8b8b8;
+
+  font-weight: 600;
+}
+
+/* FOOTER */
+
+.footer-about {
+
+  text-align: center;
+
+  padding: 30px;
+
+  color: #777;
+
+  background: black;
+
+  font-size: 14px;
+}
+
+/* ANIMATION */
+
+.reveal-about {
+
+  opacity: 0;
+
+  transform: translateY(80px);
+
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.reveal-about.active {
+
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 768px) {
+
+  .hero-about {
+
+    border-radius: 0 0 0 45px;
+  }
+
+  .hero-about h1 {
+
+    font-size: 3rem;
+  }
+
+  .hero-about h3 {
+
+    font-size: 1.3rem;
+  }
+
+  .image-grid-about {
+
+    grid-template-columns: 1fr;
+  }
+
+  .glass-card-about h1 {
+
+    font-size: 3rem;
+  }
+
+  .section-title-about {
+
+    font-size: 2.2rem;
+  }
+
+}
 
 
 /* =================================================

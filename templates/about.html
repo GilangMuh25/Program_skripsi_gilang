@@ -3,147 +3,184 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>About</title>
+  <title>About - JatimPaws</title>
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <style>
-    /* HERO */
-    .about-hero {
-      position: relative;
-      height: 70vh;
-      background: url('/static/img/about.png') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-    }
-
-    .about-hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* SECTION STYLE */
-    .about-box {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .about-box p {
-      text-align: justify;
-      line-height: 1.8;
-      margin-bottom: 15px;
-    }
-
-    .fitur-icon {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-  </style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <div class="top-links text-center py-2">
-    <a href="/" class="mx-3 text-decoration-none text-white fw-bold">Beranda</a>
-    <a href="/satwa" class="mx-3 text-decoration-none text-white fw-bold">List Satwa</a>
-    <a href="/peta" class="mx-3 text-decoration-none text-white fw-bold">Peta</a>
-    <a href="/lokasi" class="mx-3 text-decoration-none text-white fw-bold">Lokasi</a>
-    <a href="/about" class="mx-3 text-decoration-none text-white fw-bold">About</a>
-  </div>
+  <!-- MAIN SECTION -->
+  <section class="main-section-about">
 
-  <!-- HERO -->
-  <section class="about-hero">
-    <div class="about-hero-content">
-      <h1 class="display-4 fw-bold">Tentang Website</h1>
-      <p class="lead">Menjaga Satwa, Menjaga Masa Depan</p>
+    <div class="container">
+
+      <!-- HEADER MINI -->
+      <div class="text-center mb-5 reveal-about">
+
+        <h2 class="section-title-about">
+          Tentang Kami
+        </h2>
+
+      </div>
+
+      <!-- ABOUT -->
+      <div class="row align-items-center g-5 mb-5">
+
+        <!-- TEXT -->
+        <div class="col-lg-6 reveal-about">
+
+          <p class="section-text-about">
+            Sistem ini kami beri nama "JatimPaws". Sistem yang dikembangkan sebagai platform edukasi digital yang berfokus
+            pada informasi satwa dilindungi di Jawa Timur. Website ini hadir untuk
+            membantu masyarakat mengenal berbagai spesies langka beserta kawasan
+            konservasinya melalui tampilan yang modern, informatif, dan mudah diakses.
+          </p>
+
+          <p class="section-text-about">
+            Di era digital saat ini, informasi mengenai konservasi satwa masih
+            sering tersebar dan kurang menarik untuk dipelajari oleh masyarakat umum.
+            Oleh karena itu, JatimPaws dirancang dengan pendekatan visual interaktif
+            agar proses eksplorasi data satwa menjadi lebih menarik, intuitif,
+            dan mampu meningkatkan minat masyarakat terhadap isu pelestarian alam.
+          </p>
+
+          <p class="section-text-about">
+            Sistem ini menggabungkan teknologi web, peta persebaran interaktif,
+            serta data konservasi untuk menyajikan informasi secara lebih visual
+            dan edukatif. Melalui platform ini, diharapkan masyarakat dapat lebih
+            memahami pentingnya menjaga keanekaragaman hayati Indonesia serta ikut
+            mendukung upaya perlindungan satwa dan habitat alaminya.
+          </p>
+
+        </div>
+
+        <!-- IMAGE -->
+        <div class="col-lg-6 reveal-about">
+
+          <div class="image-grid-about">
+
+            <img src="/static/img/satwa1.png" alt="Satwa">
+            <img src="/static/img/peta2.png" alt="Peta">
+            <img src="/static/img/lokasi3.png" alt="Lokasi">
+            <img src="/static/img/satwa4.png" alt="Konservasi">
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- STATISTICS -->
+      <div class="text-center mt-5 mb-5 reveal-about">
+
+        <h2 class="section-statistic-about">
+          Statistik Sistem
+        </h2>
+
+      </div>
+
+      <div class="row g-4 justify-content-center mb-5">
+
+        <div class="col-md-4 reveal-about">
+
+          <div class="glass-card-about text-center">
+
+            <h1>{{ total_satwa }}</h1>
+
+            <p>Total Satwa</p>
+
+          </div>
+
+        </div>
+
+        <div class="col-md-4 reveal-about">
+
+          <div class="glass-card-about text-center">
+
+            <h1>{{ total_lokasi }}</h1>
+
+            <p>Total Lokasi</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- BBKSDA -->
+      <div class="glass-large-about text-center reveal-about mt-5">
+
+        <p class="support-text-about mb-3">
+          DIDUKUNG OLEH
+        </p>
+
+        <img src="/static/img/bbksdalogo.png"
+             alt="BBKSDA"
+             class="mb-4"
+             style="width:140px;">
+
+        <h2 class="mb-4">
+          Balai Besar KSDA Jawa Timur
+        </h2>
+
+        <p>
+          Balai Besar Konservasi Sumber Daya Alam (BBKSDA) Jawa Timur
+          merupakan lembaga yang berperan dalam pengelolaan kawasan
+          konservasi, perlindungan satwa dilindungi, serta edukasi
+          keanekaragaman hayati.
+        </p>
+
+        <p>
+          Data satwa dan lokasi konservasi pada JatimPaws digunakan
+          sebagai media informasi dan pembelajaran berbasis
+          konservasi digital.
+        </p>
+
+      </div>
+
     </div>
+
   </section>
 
-  <!-- CONTENT -->
-  <section class="container my-5">
+  <!-- FOOTER -->
+  <footer class="footer-about">
+    © 2026 JatimPaws — Developed by Gilang Muhammad
+  </footer>
 
-    <div class="about-box mb-5">
-      <div class="row align-items-center">
-        <div class="col-md-6">
-          <h3>Tentang Kami</h3>
-          <p>
-            Website ini dikembangkan sebagai media informasi digital yang menyajikan data mengenai
-            persebaran satwa dilindungi, khususnya di wilayah Jawa Timur. Tujuan utama dari website ini
-            adalah untuk meningkatkan kesadaran masyarakat terhadap pentingnya menjaga kelestarian
-            satwa liar yang terancam punah, serta memberikan akses informasi yang lebih mudah, interaktif,
-            dan edukatif.
-          </p>
-          <p>
-          Melalui fitur peta interaktif, pengguna dapat melihat secara visual lokasi persebaran satwa
-          di berbagai kawasan konservasi. Selain itu, website ini juga menyediakan informasi detail
-          mengenai masing-masing satwa, seperti nama lokal, nama ilmiah, status konservasi, serta
-          deskripsi singkat mengenai karakteristik dan habitatnya.
+  <!-- SCROLL ANIMATION -->
+  <script>
 
-          Data yang disajikan dalam website ini bersumber dari Balai Besar Konservasi Sumber Daya
-          Alam (BBKSDA) Jawa Timur sebagai lembaga resmi yang menangani konservasi satwa di wilayah tersebut.
-          Sementara itu, gambar yang digunakan pada beberapa bagian website merupakan hasil generasi
-          kecerdasan buatan (Artificial Intelligence) yang digunakan untuk mendukung visualisasi dan
-          mempermudah pemahaman pengguna.
-          </p>
-          <p>
-          Dengan adanya website ini, diharapkan dapat menjadi sarana edukasi yang bermanfaat,
-          meningkatkan kepedulian masyarakat terhadap konservasi satwa, serta mendukung upaya
-          pelestarian keanekaragaman hayati di Indonesia.
-          </p>
-        </div>
-        <div class="col-md-6">
-          <img src="/static/img/hero.png" class="img-fluid rounded shadow">
-        </div>
-      </div>
-    </div>
+    function revealOnScrollAbout() {
 
-    <!-- MISI -->
-    <div class="about-box text-center mb-5">
-      <h3>Misi Kami</h3>
-      <p>Edukasi, konservasi, dan visualisasi data satwa untuk masa depan yang lebih baik.</p>
-    </div>
+      const reveals = document.querySelectorAll('.reveal-about');
 
-    <!-- FITUR -->
-    <div class="row text-center g-4">
-      <div class="col-md-4">
-        <div class="about-box">
-          <div class="fitur-icon">🗺️</div>
-          <h5>Peta Interaktif</h5>
-          <p>Menampilkan persebaran satwa secara interaktif.</p>
-        </div>
-      </div>
+      reveals.forEach((element) => {
 
-      <div class="col-md-4">
-        <div class="about-box">
-          <div class="fitur-icon">🐾</div>
-          <h5>Data Satwa</h5>
-          <p>Informasi lengkap tentang satwa dilindungi.</p>
-        </div>
-      </div>
+        const windowHeight = window.innerHeight;
 
-      <div class="col-md-4">
-        <div class="about-box">
-          <div class="fitur-icon">📍</div>
-          <h5>Lokasi</h5>
-          <p>Detail lokasi konservasi di Indonesia.</p>
-        </div>
-      </div>
-    </div>
+        const revealTop = element.getBoundingClientRect().top;
 
-    <!-- TECH -->
-    <div class="about-box text-center mt-5">
-      <h4>Teknologi</h4>
-      <p>Flask • PostgreSQL • Folium • Bootstrap</p>
-    </div>
+        const revealPoint = 120;
 
-  </section>
+        if (revealTop < windowHeight - revealPoint) {
+
+          element.classList.add('active');
+
+        }
+
+      });
+
+    }
+
+    window.addEventListener('scroll', revealOnScrollAbout);
+
+    revealOnScrollAbout();
+
+  </script>
 
 </body>
 

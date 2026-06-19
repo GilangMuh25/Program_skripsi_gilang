@@ -31,9 +31,16 @@ app.register_blueprint(admin_bp)
 # =======================
 # about
 # =======================
+
+
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    total_lokasi = LokasiKonservasi.query.count()
+    total_satwa = Satwa.query.count()
+    return render_template('about.html',
+                           total_lokasi=total_lokasi,
+                           total_satwa=total_satwa)
+
 
 # =======================
 # LOGIN

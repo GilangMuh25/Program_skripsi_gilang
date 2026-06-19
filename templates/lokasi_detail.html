@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <title>Detail Lokasi {{ lokasi.nama_lokasi }}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
 
   <!-- NAVBAR -->
   <div class="top-links text-center py-2">
     <a href="/" class="mx-3 text-decoration-none text-black fw-bold">Beranda</a>
     <a href="/satwa" class="mx-3 text-decoration-none text-black fw-bold active">List Satwa</a>
-    
+
     <a href="/lokasi" class="mx-3 text-decoration-none text-black fw-bold">Lokasi</a>
     <a href="/about" class="mx-3 text-decoration-none text-black fw-bold">About</a>
   </div>
@@ -26,42 +28,41 @@
       <!-- Foto di kiri -->
       <div class="col-md-6">
         <img src="{{ url_for('static', filename='img/lokasi/' ~ (lokasi.gambar if lokasi.gambar else 'default.png')) }}"
-             class="img-fluid rounded shadow-sm" alt="{{ lokasi.nama_lokasi }}">
+          class="img-fluid rounded shadow-sm" alt="{{ lokasi.nama_lokasi }}">
       </div>
 
       <!-- Peta mini di kanan -->
       <div class="col-md-6">
         <div class="map-mini" style="height:300px;">
           <iframe src="/peta?lokasi={{ lokasi.nama_lokasi }}&mini=true"
-                  style="width:100%; height:100%; border:none;"></iframe>
+            style="width:100%; height:100%; border:none;"></iframe>
         </div>
       </div>
     </div>
 
-<!-- Deskripsi di bawah -->
-<div class="mt-4">
-  <h5>Deskripsi Lokasi</h5>
-  <div class="lokasi-deskripsi">
-    {{ lokasi.deskripsi | safe or 'Kawasan konservasi satwa dilindungi.' }}
-  </div>
-</div>
+    <!-- Deskripsi di bawah -->
+    <div class="mt-4">
+      <div class="glass-desc">
+        <h5 class="mb-3">Deskripsi Lokasi</h5>
 
-<a href="/lokasi/kategori/{{ lokasi.kategori }}" class="btn btn-secondary mt-3">
-  Kembali ke {{ lokasi.kategori }}
-</a>
-
+        <div class="lokasi-deskripsi">
+          {{ lokasi.deskripsi | safe or 'Kawasan konservasi satwa dilindungi.' }}
+        </div>
+      </div>
+    </div>
 
 
-<!-- List Satwa di Lokasi -->
-<div class="mt-4 container">
-  <h5 class="mb-3 text-center">Satwa di {{ lokasi.nama_lokasi }}</h5>
-  {% if lokasi.satwa_relasi %}
-    <ul class="list-group mx-auto">
-      {% for relasi in lokasi.satwa_relasi %}
+
+    <!-- List Satwa di Lokasi -->
+    <div class="mt-4 container">
+      <h5 class="mb-3 text-center">Satwa di {{ lokasi.nama_lokasi }}</h5>
+      {% if lokasi.satwa_relasi %}
+      <ul class="list-group mx-auto">
+        {% for relasi in lokasi.satwa_relasi %}
         <a href="{{ url_for('satwa_detail', satwa_id=relasi.satwa.id) }}"
-           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           <span>
-            <strong>{{ relasi.satwa.nama_satwa }}</strong>  
+            <strong>{{ relasi.satwa.nama_satwa }}</strong>
             ({{ relasi.satwa.jenis_satwa }})
           </span>
           <span class="badge rounded-pill
@@ -77,12 +78,13 @@
             {{ relasi.satwa.status_satwa }}
           </span>
         </a>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p class="text-muted text-center">Belum ada data satwa untuk lokasi ini.</p>
-  {% endif %}
-</div>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="text-muted text-center">Belum ada data satwa untuk lokasi ini.</p>
+      {% endif %}
+    </div>
 
 </body>
+
 </html>
