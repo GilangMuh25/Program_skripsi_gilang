@@ -56,7 +56,7 @@
             <div class="mb-3">
                 <input type="text" id="searchInput" class="form-control" placeholder="Cari lokasi...">
             </div>
-                        <!-- ✅ Flash messages -->
+            <!-- ✅ Flash messages -->
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
             <div id="flash-messages" class="mb-3">
@@ -74,9 +74,9 @@
                 <thead class="table-dark">
                     <tr>
                         <th style="width: 60px;">No</th>
-                        <th style="width: 220px;">Nama Lokasi</th>
-                        <th style="width: 180px;">Kategori</th>
-                        <th style="width: 300px;">Deskripsi</th>
+                        <th style="width: 200px;">Nama Lokasi</th>
+                        <th style="width: 150px;">Kategori</th>
+                        <th style="width: 150px;">Deskripsi</th>
                         <th style="width: 120px;">Latitude</th>
                         <th style="width: 120px;">Longitude</th>
                         <th style="width: 160px;">Aksi</th>
@@ -88,7 +88,11 @@
                         <td>{{ loop.index }}</td>
                         <td>{{ lokasi.nama_lokasi }}</td>
                         <td>{{ lokasi.kategori }}</td>
-                        <td class="desc-cell">{{ lokasi.deskripsi | safe }}</td>
+                        <td>
+                            <div class="deskripsi-preview">
+                                {{ lokasi.deskripsi | striptags }}
+                            </div>
+                        </td>
                         <td>{{ lokasi.latitude }}</td>
                         <td>{{ lokasi.longitude }}</td>
                         <td>
@@ -97,7 +101,7 @@
                                     class="btn btn-sm btn-primary">Edit</a>
                                 <a href="{{ url_for('admin.delete_lokasi', lokasi_id=lokasi.id) }}"
                                     class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Yakin hapus lokasi ini?')">Hapus</a>
+                                    onclick="return confirm('Yakin hapus data ini?')">Hapus</a>
                             </div>
                         </td>
                     </tr>
@@ -108,6 +112,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+
         </div>
     </div>
 

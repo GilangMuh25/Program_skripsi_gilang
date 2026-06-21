@@ -739,17 +739,21 @@ footer p {
 /* =================================================
   adminlokasi.html
 ================================================= */
+.deskripsi-preview{
+    max-width: 220px;
+    overflow: hidden;
 
-/* supaya deskripsi wrap ke bawah */
-.desc-cell {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;       /* tampil maksimal 2 baris */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;         /* biar teks bisa turun ke bawah */
-  max-width: 300px;            /* sesuaikan lebar kolom */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* tampil 2 baris */
+    -webkit-box-orient: vertical;
+
+    line-height: 1.5;
 }
+
+
+
+
+
 
 /* =================================================
   Animasi sidebar & layout
