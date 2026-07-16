@@ -15,3 +15,21 @@ __pycache__/
 
 # Alembic migration cache
 migrations/__pycache__/
+
+# IDE & editor settings
+.vscode/
+.idea/
+
+# OS cache
+Thumbs.db
+.DS_Store
+
+# Deployment configs (opsional)
+*.bak
+*.tmp
+
+# Node modules (kalau ada frontend tambahan)
+node_modules/
+
+# Static build cache
+static/cache/
